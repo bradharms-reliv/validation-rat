@@ -20,7 +20,9 @@
   ],
   "require": {
     "php": ">=7",
-    "reliv/array-properties": "^0"
+    "psr/container": "^1",
+    "reliv/array-properties": "^0",
+    "reliv/zf-config-factories": "^4"
   },
   "require-dev": {
     "phpunit/phpunit": "5.*"
