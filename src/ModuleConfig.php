@@ -26,6 +26,8 @@ use Reliv\ValidationRat\Api\Validator\ValidateIsClass;
 use Reliv\ValidationRat\Api\Validator\ValidateIsClassFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsEmpty;
 use Reliv\ValidationRat\Api\Validator\ValidateIsEmptyFactory;
+use Reliv\ValidationRat\Api\Validator\ValidateIsInt;
+use Reliv\ValidationRat\Api\Validator\ValidateIsIntFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsNotEmpty;
 use Reliv\ValidationRat\Api\Validator\ValidateIsNotEmptyFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsNull;
@@ -87,6 +89,9 @@ class ModuleConfig
                     ],
                     ValidateIsNotEmpty::class => [
                         'factory' => ValidateIsNotEmptyFactory::class,
+                    ],
+                    ValidateIsInt::class => [
+                        'factory' => ValidateIsIntFactory::class,
                     ],
                     ValidateIsNull::class => [
                         'factory' => ValidateIsNullFactory::class,
