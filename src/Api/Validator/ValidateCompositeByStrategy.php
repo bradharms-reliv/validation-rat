@@ -7,6 +7,8 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
 use Reliv\ArrayProperties\Property;
 
 /**
+ * If any validator fails - all fail
+ *
  * @author James Jervis - https://github.com/jerv13
  */
 class ValidateCompositeByStrategy implements Validate
@@ -25,7 +27,7 @@ class ValidateCompositeByStrategy implements Validate
     }
 
     /**
-     * @param       $value
+     * @param mixed $value
      * @param array $options
      *
      * @return ValidationResult
