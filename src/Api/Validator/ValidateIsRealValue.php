@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,6 +11,8 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsRealValue implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+
     const CODE_MUST_NOT_BE_EMPTY_STRING = 'must-not-be-empty-string';
     const CODE_MUST_NOT_BE_NULL = 'must-not-be-null';
 
@@ -26,14 +29,14 @@ class ValidateIsRealValue implements Validate
         if ($value === '') {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_NOT_BE_EMPTY_STRING
+                BuildOptionCode::invoke($options, static::CODE_MUST_NOT_BE_EMPTY_STRING)
             );
         }
 
         if ($value === null) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_NOT_BE_NULL
+                BuildOptionCode::invoke($options, static::CODE_MUST_NOT_BE_NULL)
             );
         }
 

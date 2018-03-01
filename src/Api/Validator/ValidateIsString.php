@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,6 +11,7 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsString implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
     const CODE_MUST_BE_STRING = 'must-be-string';
 
     /**
@@ -25,7 +27,7 @@ class ValidateIsString implements Validate
         if (!is_string($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_STRING
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_STRING)
             );
         }
 

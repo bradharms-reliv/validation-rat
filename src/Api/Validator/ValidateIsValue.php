@@ -2,15 +2,17 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ArrayProperties\Property;
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
 class ValidateIsValue implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
     const OPTION_REQUIRED_VALUE = 'required-value';
 
     const CODE_MUST_BE_REQUIRED_VALUE = 'must-be-required-value';
@@ -35,7 +37,7 @@ class ValidateIsValue implements Validate
         if ($value !== $requiredValue) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_REQUIRED_VALUE,
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_REQUIRED_VALUE),
                 [
                     static::OPTION_REQUIRED_VALUE => $requiredValue,
                 ]

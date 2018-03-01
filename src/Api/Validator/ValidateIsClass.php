@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,8 +11,11 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsClass implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+
     const CODE_MUST_BE_CLASS_NAME = 'must-be-class-name';
     const CODE_MUST_BE_CLASS = 'must-be-class';
+
     /**
      * @param mixed $value
      * @param array $options
@@ -25,14 +29,14 @@ class ValidateIsClass implements Validate
         if (!is_string($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_CLASS_NAME
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_CLASS_NAME)
             );
         }
 
         if (!class_exists($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_CLASS
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_CLASS)
             );
         }
 

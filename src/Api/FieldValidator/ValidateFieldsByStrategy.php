@@ -3,6 +3,7 @@
 namespace Reliv\ValidationRat\Api\FieldValidator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\ArrayProperties\Property;
 use Reliv\ValidationRat\Api\BuildCode;
 use Reliv\ValidationRat\Api\BuildFieldNotRecognizedResult;
 use Reliv\ValidationRat\Api\IsValidFieldResults;
@@ -12,15 +13,12 @@ use Reliv\ValidationRat\Exception\ValidateApiInvalid;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultFields;
 use Reliv\ValidationRat\Model\ValidationResultFieldsBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
 class ValidateFieldsByStrategy implements ValidateFields
 {
-    const CODE_UNRECOGNIZED_FIELD = 'unrecognized-field';
-
     const OPTION_FIELD_VALIDATORS = 'field-validators';
     const OPTION_INVALID_CODE = 'code-invalid';
 

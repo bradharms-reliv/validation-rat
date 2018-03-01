@@ -3,14 +3,13 @@
 namespace Reliv\ValidationRat\Api;
 
 use Reliv\ValidationRat\Model\ValidationResultBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
 class BuildFieldNotRecognizedResult
 {
-    const OPTION_UNRECOGNIZED_FIELD_CODE = 'code-unrecognized-field';
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
 
     const CODE_UNRECOGNIZED_FIELD = 'unrecognized-field';
 
@@ -26,11 +25,7 @@ class BuildFieldNotRecognizedResult
     ) {
         return new ValidationResultBasic(
             false,
-            Property::getString(
-                $options,
-                self::OPTION_UNRECOGNIZED_FIELD_CODE,
-                self::CODE_UNRECOGNIZED_FIELD
-            ),
+            BuildOptionCode::invoke($options, self::CODE_UNRECOGNIZED_FIELD),
             ['message' => 'Unrecognized field received: (' . $fieldName . ')']
         );
     }
