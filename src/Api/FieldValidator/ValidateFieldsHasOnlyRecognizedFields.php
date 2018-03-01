@@ -40,7 +40,7 @@ class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
 
         $fieldResults = $this->getFieldValidationResults(
             $fields,
-            $allowedFields
+            $allowedFields,
             [],
             $options
         );
