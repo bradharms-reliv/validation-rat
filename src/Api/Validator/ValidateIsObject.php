@@ -2,19 +2,21 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ArrayProperties\Property;
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
 class ValidateIsObject implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+    const OPTION_OBJECT_TYPE = 'object-type';
+
     const CODE_MUST_BE_OBJECT = 'must-be-object';
     const CODE_MUST_BE_OBJECT_OF_TYPE = 'must-be-object-of-type';
-
-    const OPTION_OBJECT_TYPE = 'object-type';
 
     /**
      * @param mixed $value
@@ -29,7 +31,7 @@ class ValidateIsObject implements Validate
         if (!is_object($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_OBJECT
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_OBJECT)
             );
         }
 
@@ -45,7 +47,7 @@ class ValidateIsObject implements Validate
         if (!is_a($value, $objectType)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_OBJECT_OF_TYPE,
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_OBJECT_OF_TYPE),
                 ['message' => 'Object: (' . get_class($value) . ') must be type of: (' . $objectType . ')']
             );
         }

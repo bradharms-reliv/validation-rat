@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,6 +11,8 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsEmpty implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+
     const CODE_MUST_BE_EMPTY = 'must-be-empty';
 
     /**
@@ -25,7 +28,7 @@ class ValidateIsEmpty implements Validate
         if (!empty($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_EMPTY
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_EMPTY)
             );
         }
 

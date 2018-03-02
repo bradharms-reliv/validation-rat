@@ -3,9 +3,9 @@
 namespace Reliv\ValidationRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\ArrayProperties\Property;
 use Reliv\ValidationRat\Exception\ValidateApiInvalid;
 use Reliv\ValidationRat\Model\ValidationResult;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13

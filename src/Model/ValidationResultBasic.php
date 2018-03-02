@@ -43,6 +43,8 @@ class ValidationResultBasic implements ValidationResult
     }
 
     /**
+     * ['{name}' => {value}]
+     *
      * @return array
      */
     public function getDetails(): array

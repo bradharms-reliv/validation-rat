@@ -32,6 +32,8 @@ class ValidationResultFieldsBasic extends ValidationResultBasic implements Valid
     }
 
     /**
+     * ['{fieldName}' => ValidationResult]
+     *
      * @return ValidationResult[]
      */
     public function getFieldResults(): array

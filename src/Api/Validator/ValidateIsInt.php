@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,6 +11,8 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsInt implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+
     const CODE_MUST_BE_INT = 'must-be-int';
 
     /**
@@ -25,7 +28,7 @@ class ValidateIsInt implements Validate
         if (!is_int($value)) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_INT
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_INT)
             );
         }
 

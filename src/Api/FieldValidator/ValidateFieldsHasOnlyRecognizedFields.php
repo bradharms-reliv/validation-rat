@@ -2,19 +2,22 @@
 
 namespace Reliv\ValidationRat\Api\FieldValidator;
 
+use Reliv\ArrayProperties\Property;
 use Reliv\ValidationRat\Api\BuildCode;
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Api\IsValidFieldResults;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 use Reliv\ValidationRat\Model\ValidationResultFields;
 use Reliv\ValidationRat\Model\ValidationResultFieldsBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
 class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
+
     const CODE_UNRECOGNIZED_FIELD = 'unrecognized-field';
 
     const OPTION_FIELDS_ALLOWED = 'fields-allowed';
@@ -37,7 +40,9 @@ class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
 
         $fieldResults = $this->getFieldValidationResults(
             $fields,
-            $allowedFields
+            $allowedFields,
+            [],
+            $options
         );
 
         $valid = IsValidFieldResults::invoke(
@@ -48,14 +53,16 @@ class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
         $code = BuildCode::invoke(
             $valid,
             $options,
-            static::CODE_UNRECOGNIZED_FIELD
+            BuildOptionCode::invoke($options, static::CODE_UNRECOGNIZED_FIELD)
         );
 
         $details = [];
 
         if (!$valid) {
             $details['unrecognized-fields'] = $this->buildUnrecognizedFields(
-                $fieldResults
+                $fieldResults,
+                [],
+                $options
             );
         }
 
@@ -71,19 +78,21 @@ class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
      * @param array $fields
      * @param array $allowedFields
      * @param array $fieldResults
+     * @param array $options
      *
      * @return array
      */
     protected function getFieldValidationResults(
         array $fields,
         array $allowedFields = [],
-        array $fieldResults = []
+        array $fieldResults = [],
+        array $options = []
     ): array {
         foreach ($fields as $fieldName => $value) {
             if (!in_array($fieldName, $allowedFields)) {
                 $fieldResults[$fieldName] = new ValidationResultBasic(
                     false,
-                    self::CODE_UNRECOGNIZED_FIELD,
+                    BuildOptionCode::invoke($options, static::CODE_UNRECOGNIZED_FIELD),
                     ['message' => 'Unrecognized field received: (' . $fieldName . ')']
                 );
             }
@@ -94,15 +103,15 @@ class ValidateFieldsHasOnlyRecognizedFields implements ValidateFields
 
     /**
      * @param array $fieldResults
-     * @param array $options
      * @param array $unrecognizedFields
+     * @param array $options
      *
      * @return array
      */
     protected function buildUnrecognizedFields(
         array $fieldResults,
-        array $options = [],
-        array $unrecognizedFields = []
+        array $unrecognizedFields = [],
+        array $options = []
     ): array {
         /** @var ValidationResult $validationResult */
         foreach ($fieldResults as $fieldName => $validationResult) {

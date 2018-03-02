@@ -2,9 +2,9 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ArrayProperties\Property;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * If any validator fails - all fail

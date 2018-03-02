@@ -2,6 +2,7 @@
 
 namespace Reliv\ValidationRat\Api\Validator;
 
+use Reliv\ValidationRat\Api\BuildOptionCode;
 use Reliv\ValidationRat\Model\ValidationResult;
 use Reliv\ValidationRat\Model\ValidationResultBasic;
 
@@ -10,6 +11,7 @@ use Reliv\ValidationRat\Model\ValidationResultBasic;
  */
 class ValidateIsNull implements Validate
 {
+    const OPTION_CODES = BuildOptionCode::OPTION_CODES;
     const CODE_MUST_BE_NULL = 'must-be-null';
 
     /**
@@ -25,7 +27,7 @@ class ValidateIsNull implements Validate
         if ($value !== null) {
             return new ValidationResultBasic(
                 false,
-                static::CODE_MUST_BE_NULL
+                BuildOptionCode::invoke($options, static::CODE_MUST_BE_NULL)
             );
         }
 

@@ -18,6 +18,8 @@ interface ValidationResult
     public function getCode():string;
 
     /**
+     * ['{name}' => {value}]
+     *
      * @return array
      */
     public function getDetails(): array;

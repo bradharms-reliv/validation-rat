@@ -10,6 +10,8 @@ use Reliv\ValidationRat\Exception\FieldDoesNotExist;
 interface ValidationResultFields extends ValidationResult
 {
     /**
+     * ['{fieldName}' => ValidationResult]
+     *
      * @return ValidationResult[]
      */
     public function getFieldResults(): array;
