@@ -23,7 +23,7 @@ class ValidationResultFieldsBasic extends ValidationResultBasic implements Valid
         array $details = [],
         array $fieldResults = []
     ) {
-        $this->fieldResults = $fieldResults;
+        $this->setFieldResults($fieldResults);
         parent::__construct(
             $valid,
             $code,
