@@ -22,6 +22,8 @@ use Reliv\ValidationRat\Api\Validator\ValidateIsArrayOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsArrayOrNullFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsAssociativeArray;
 use Reliv\ValidationRat\Api\Validator\ValidateIsAssociativeArrayFactory;
+use Reliv\ValidationRat\Api\Validator\ValidateIsAssociativeArrayOrNull;
+use Reliv\ValidationRat\Api\Validator\ValidateIsAssociativeArrayOrNullFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsBoolean;
 use Reliv\ValidationRat\Api\Validator\ValidateIsBooleanFactory;
 use Reliv\ValidationRat\Api\Validator\ValidateIsBooleanOrNull;
@@ -90,6 +92,9 @@ class ModuleConfig
                     ],
                     ValidateIsAssociativeArray::class => [
                         'factory' => ValidateIsAssociativeArrayFactory::class,
+                    ],
+                    ValidateIsAssociativeArrayOrNull::class => [
+                        'factory' => ValidateIsAssociativeArrayOrNullFactory::class,
                     ],
                     ValidateIsBoolean::class => [
                         'factory' => ValidateIsBooleanFactory::class,
